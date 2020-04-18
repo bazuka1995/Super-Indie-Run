@@ -27,7 +27,10 @@ class GameScene: SKScene {
     var player: Player!
     
     override func didMove(to view: SKView) {
-        createLayers() //
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0, dy: -6.0)
+        
+        createLayers()
     }
     
     func createLayers() {
@@ -75,6 +78,7 @@ class GameScene: SKScene {
         player = Player(imageNamed: GameConstants.StringConstants.playerImageName)
         player.scale(to: frame.size, width: false, multiplier: 0.1) //make player 0.1 times the size of the screen
         player.name = GameConstants.StringConstants.playerName
+        PhysicsHelper.addPhysicsBody(to: player, with: player.name!)
         player.position = CGPoint(x: frame.midX/2.0, y: frame.midY)
         player.zPosition = GameConstants.ZPositions.playerZ
         addChild(player)
@@ -113,4 +117,8 @@ class GameScene: SKScene {
         }
         
     }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    
 }
