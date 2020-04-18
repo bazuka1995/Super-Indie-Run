@@ -24,6 +24,8 @@ class GameScene: SKScene {
     
     var gameState = GameState.ready
     
+    var player: Player!
+    
     override func didMove(to view: SKView) {
         createLayers() //
     }
@@ -65,6 +67,17 @@ class GameScene: SKScene {
             tileMap = groundTiles
             tileMap.scale(to: frame.size, width: false, multiplier: 1.0) // false because use height to scale --> make sure that the level scales correctly depending on the size of the screen
         }
+        
+        addPlayer()
+    }
+    
+    func addPlayer() { //load level, then tilemap, then player
+        player = Player(imageNamed: GameConstants.StringConstants.playerImageName)
+        player.scale(to: frame.size, width: false, multiplier: 0.1) //make player 0.1 times the size of the screen
+        player.name = GameConstants.StringConstants.playerName
+        player.position = CGPoint(x: frame.midX/2.0, y: frame.midY)
+        player.zPosition = GameConstants.ZPositions.playerZ
+        addChild(player)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
