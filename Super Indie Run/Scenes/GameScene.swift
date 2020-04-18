@@ -22,7 +22,18 @@ class GameScene: SKScene {
     var lastTime: TimeInterval = 0 // keep track of time and make sure that we always update the correct position
     var dt: TimeInterval = 0 // and have a smooth movement
     
-    var gameState = GameState.ready
+    var gameState = GameState.ready {
+        willSet {
+            switch newValue {
+            case .ongoing: // happen when starting game
+                player.state = .running
+            case .finished:
+                player.state = .idle
+            default:
+                break
+            }
+        }
+    }
     
     var player: Player!
     
@@ -82,6 +93,8 @@ class GameScene: SKScene {
         PhysicsHelper.addPhysicsBody(to: player, with: player.name!)
         player.position = CGPoint(x: frame.midX/2.0, y: frame.midY)
         player.zPosition = GameConstants.ZPositions.playerZ
+        player.loadTextures()
+        player.state = .idle
         addChild(player)
     }
     
