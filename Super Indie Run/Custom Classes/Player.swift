@@ -13,7 +13,7 @@ enum PlayerState {
 }
 
 class Player: SKSpriteNode {
-    
+
     var runFrames = [SKTexture]()
     var idleFrames = [SKTexture]()
     var jumpFrames = [SKTexture]()
@@ -36,9 +36,9 @@ class Player: SKSpriteNode {
         removeAllActions() //dont stack actions on top of each other
         switch state {
         case .idle:
-            self.run(SKAction.repeatForever(SKAction.animate(withNormalTextures: idleFrames, timePerFrame: 0.05, resize: true, restore: true))) // restore determines what happens next after the action stops. ture --> texture will be reset to the texture before the animation
+            self.run(SKAction.repeatForever(SKAction.animate(with: idleFrames, timePerFrame: 0.05, resize: true, restore: true)))
         case .running:
-            self.run(SKAction.repeatForever(SKAction.animate(withNormalTextures: runFrames, timePerFrame: 0.05, resize: true, restore: true)))
+            self.run(SKAction.repeatForever(SKAction.animate(with: runFrames, timePerFrame: 0.05, resize: true, restore: true)))
         }
     }
     
