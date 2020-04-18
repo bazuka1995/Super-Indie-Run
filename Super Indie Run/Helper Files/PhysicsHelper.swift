@@ -23,4 +23,37 @@ class PhysicsHelper {
         
     }
     
+    static func addPhysicsBody(to tileMap: SKTileMapNode, tileInfo: String) {
+        let tileSize = tileMap.tileSize // how big the tiles in our map
+        
+        for row in 0..<tileMap.numberOfRows {
+            var tiles = [Int]()
+            for col in 0..<tileMap.numberOfColumns {
+                let tileDefinition = tileMap.tileDefinition(atColumn: col, row: row)
+                let isUsedTile = tileDefinition?.userData?[tileInfo] as? Bool
+                if isUsedTile ?? false {
+                    tiles.append(1)
+                } else {
+                    tiles.append(0)
+                }
+            }
+            if tiles.contains(1) {
+                var platform = [Int] ()
+                for (index,tile) in tiles.enumerated() { //adds tiles to the platform array
+                    if tile == 1 && index < (tileMap.numberOfColumns - 1) { // if this is true, next tile is a ground tile and we arent at the end of the map yet
+                        platform.append(index)
+                    } else if !platform.isEmpty {
+                        let x = CGFloat(platform[0]) * tileSize.width //first index of platform * width of tiles
+                        let y = CGFloat(row) * tileSize.height // row * height of tile
+                        let tileNode = GroundNode(with: CGSize(width: tileSize.width * CGFloat(platform.count), height: tileSize.height)) // we check the number of tiles in our platform and * width of 1 platform
+                        tileNode.position = CGPoint(x: x, y: y)
+                        tileNode.anchorPoint = CGPoint.zero
+                        tileMap.addChild(tileNode)
+                        platform.removeAll()
+                    }
+                }
+            }
+        }
+    }
+    
 }

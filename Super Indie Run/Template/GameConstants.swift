@@ -25,6 +25,7 @@ struct GameConstants {
         static let worldBackgroundNames = ["DesertBackground", "GrassBackground"]
         static let playerName = "Player"
         static let playerImageName = "Idle_0"
+        static let groundNodeName = "GroundNode"
     }
     
 }

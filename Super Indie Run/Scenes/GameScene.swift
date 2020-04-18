@@ -69,6 +69,7 @@ class GameScene: SKScene {
         if let groundTiles = mapNode.childNode(withName: GameConstants.StringConstants.groundTilesName) as? SKTileMapNode {
             tileMap = groundTiles
             tileMap.scale(to: frame.size, width: false, multiplier: 1.0) // false because use height to scale --> make sure that the level scales correctly depending on the size of the screen
+            PhysicsHelper.addPhysicsBody(to: tileMap, tileInfo: "ground")
         }
         
         addPlayer()
@@ -117,6 +118,17 @@ class GameScene: SKScene {
         }
         
     }
+    
+    override func didSimulatePhysics() { // track position of player and activate or deactivate physics body of node
+        for node in tileMap[GameConstants.StringConstants.groundNodeName] {
+            if let groundNode = node as? GroundNode {
+                let groundY = (groundNode.position.y + groundNode.size.height) * tileMap.yScale
+                let playerY = player.position.y - player.size.height/3
+                groundNode.isBodyActivated = playerY > groundY // if y position of player is higher than y position of ground node, physics is activated
+            }
+        }
+    }
+    
 }
 
 extension GameScene: SKPhysicsContactDelegate {
