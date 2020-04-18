@@ -20,4 +20,9 @@ struct GameConstants {
         static let hudZ: CGFloat = 5
     }
     
+    struct StringConstants {
+        static let groundTilesName = "Ground Tiles"
+        static let worldBackgroundNames = ["DesertBackground", "GrassBackground"]
+    }
+    
 }

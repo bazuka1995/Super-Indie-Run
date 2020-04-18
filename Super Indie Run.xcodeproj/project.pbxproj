@@ -21,6 +21,7 @@
 		964B56842449EB0700BD1C06 /* Super_Indie_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964B56832449EB0700BD1C06 /* Super_Indie_RunUITests.swift */; };
 		96739E54244AD209002A9B32 /* RepeatingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96739E53244AD209002A9B32 /* RepeatingLayer.swift */; };
 		96739E56244AD6F4002A9B32 /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96739E55244AD6F4002A9B32 /* GameConstants.swift */; };
+		96739E59244ADA55002A9B32 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96739E58244ADA55002A9B32 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		964B56852449EB0700BD1C06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96739E53244AD209002A9B32 /* RepeatingLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingLayer.swift; sourceTree = "<group>"; };
 		96739E55244AD6F4002A9B32 /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
+		96739E58244ADA55002A9B32 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		964B565C2449EB0400BD1C06 /* Super Indie Run */ = {
 			isa = PBXGroup;
 			children = (
+				96739E57244ADA22002A9B32 /* Custom Classes */,
 				960900BA244AC3DD00F1B4A9 /* Layers */,
 				960900B7244AA1C400F1B4A9 /* Extensions */,
 				960900B3244A9F8700F1B4A9 /* Tiles */,
@@ -181,6 +184,14 @@
 				964B56852449EB0700BD1C06 /* Info.plist */,
 			);
 			path = "Super Indie RunUITests";
+			sourceTree = "<group>";
+		};
+		96739E57244ADA22002A9B32 /* Custom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				96739E58244ADA55002A9B32 /* Player.swift */,
+			);
+			path = "Custom Classes";
 			sourceTree = "<group>";
 		};
 		969F56082449ED2E0003F981 /* Template */ = {
@@ -355,6 +366,7 @@
 				960900B9244AA1D500F1B4A9 /* SKNode+Extensions.swift in Sources */,
 				960900BC244AC3E800F1B4A9 /* Layer.swift in Sources */,
 				964B56662449EB0400BD1C06 /* GameViewController.swift in Sources */,
+				96739E59244ADA55002A9B32 /* Player.swift in Sources */,
 				96739E56244AD6F4002A9B32 /* GameConstants.swift in Sources */,
 				964B565E2449EB0400BD1C06 /* AppDelegate.swift in Sources */,
 				96739E54244AD209002A9B32 /* RepeatingLayer.swift in Sources */,

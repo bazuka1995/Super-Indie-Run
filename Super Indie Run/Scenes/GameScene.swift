@@ -39,7 +39,7 @@ class GameScene: SKScene {
         addChild(backgroundLayer) // add layer to the gamescene
         
         for i in 0...1 { //create a spritenode initialised with background image
-            let backgroundImage = SKSpriteNode(imageNamed: "DesertBackground")
+            let backgroundImage = SKSpriteNode(imageNamed: GameConstants.StringConstants.worldBackgroundNames[0])
             backgroundImage.name = String(i) // names the sprite 0 and 1
             backgroundImage.scale(to: frame.size, width: false, multiplier: 1.0) // scale image to the whole screen, width = false because we are scaling the height, multiplier = 1 because we want the image to fill the whole screen
             backgroundImage.anchorPoint = CGPoint.zero // place image in bottom left corner
@@ -61,7 +61,7 @@ class GameScene: SKScene {
     }
     
     func loadTileMap() {
-        if let groundTiles = mapNode.childNode(withName: "Ground Tiles") as? SKTileMapNode {
+        if let groundTiles = mapNode.childNode(withName: GameConstants.StringConstants.groundTilesName) as? SKTileMapNode {
             tileMap = groundTiles
             tileMap.scale(to: frame.size, width: false, multiplier: 1.0) // false because use height to scale --> make sure that the level scales correctly depending on the size of the screen
         }
