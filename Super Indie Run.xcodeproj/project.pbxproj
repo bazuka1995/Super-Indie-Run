@@ -19,6 +19,8 @@
 		964B566E2449EB0700BD1C06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 964B566C2449EB0700BD1C06 /* LaunchScreen.storyboard */; };
 		964B56792449EB0700BD1C06 /* Super_Indie_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964B56782449EB0700BD1C06 /* Super_Indie_RunTests.swift */; };
 		964B56842449EB0700BD1C06 /* Super_Indie_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964B56832449EB0700BD1C06 /* Super_Indie_RunUITests.swift */; };
+		96739E54244AD209002A9B32 /* RepeatingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96739E53244AD209002A9B32 /* RepeatingLayer.swift */; };
+		96739E56244AD6F4002A9B32 /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96739E55244AD6F4002A9B32 /* GameConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		964B567F2449EB0700BD1C06 /* Super Indie RunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Super Indie RunUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		964B56832449EB0700BD1C06 /* Super_Indie_RunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Super_Indie_RunUITests.swift; sourceTree = "<group>"; };
 		964B56852449EB0700BD1C06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96739E53244AD209002A9B32 /* RepeatingLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingLayer.swift; sourceTree = "<group>"; };
+		96739E55244AD6F4002A9B32 /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				960900BB244AC3E800F1B4A9 /* Layer.swift */,
+				96739E53244AD209002A9B32 /* RepeatingLayer.swift */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			children = (
 				964B565D2449EB0400BD1C06 /* AppDelegate.swift */,
 				964B566F2449EB0700BD1C06 /* Info.plist */,
+				96739E55244AD6F4002A9B32 /* GameConstants.swift */,
 			);
 			path = Template;
 			sourceTree = "<group>";
@@ -349,7 +355,9 @@
 				960900B9244AA1D500F1B4A9 /* SKNode+Extensions.swift in Sources */,
 				960900BC244AC3E800F1B4A9 /* Layer.swift in Sources */,
 				964B56662449EB0400BD1C06 /* GameViewController.swift in Sources */,
+				96739E56244AD6F4002A9B32 /* GameConstants.swift in Sources */,
 				964B565E2449EB0400BD1C06 /* AppDelegate.swift in Sources */,
+				96739E54244AD209002A9B32 /* RepeatingLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

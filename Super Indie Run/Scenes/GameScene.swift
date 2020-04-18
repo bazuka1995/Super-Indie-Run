@@ -15,6 +15,7 @@ enum GameState { // set the gamestate so that we know when to stop the scrolling
 class GameScene: SKScene {
     
     var worldLayer: Layer!
+    var backgroundLayer: RepeatingLayer!
     var mapNode: SKNode!
     var tileMap: SKTileMapNode! //! --> Wont be needing an initialiser but make sure they have already been initialised
     
@@ -29,8 +30,25 @@ class GameScene: SKScene {
     
     func createLayers() {
         worldLayer = Layer()
+        worldLayer.zPosition = GameConstants.ZPositions.worldZ
         addChild(worldLayer) // add worldlayer to the scene as a child
         worldLayer.layerVelocity = CGPoint(x: -200.0, y: 0.0) // declare velocity of worldlayer --> tell our layer how much it should move using x and y values. => -200 because it moves to the left
+        
+        backgroundLayer = RepeatingLayer()
+        backgroundLayer.zPosition = GameConstants.ZPositions.farBGZ
+        addChild(backgroundLayer) // add layer to the gamescene
+        
+        for i in 0...1 { //create a spritenode initialised with background image
+            let backgroundImage = SKSpriteNode(imageNamed: "DesertBackground")
+            backgroundImage.name = String(i) // names the sprite 0 and 1
+            backgroundImage.scale(to: frame.size, width: false, multiplier: 1.0) // scale image to the whole screen, width = false because we are scaling the height, multiplier = 1 because we want the image to fill the whole screen
+            backgroundImage.anchorPoint = CGPoint.zero // place image in bottom left corner
+            backgroundImage.position = CGPoint(x: 0.0 + CGFloat(i) * backgroundImage.size.width, y: 0.0) // position second image after first one. First loop i = 0, so position will be 0. second image will be offset by the width of the first image
+            backgroundLayer.addChild(backgroundImage)
+        }
+        
+        backgroundLayer.layerVelocity = CGPoint(x: -100.0, y: 0.0) // set velocity of background. speed is half the map velocity to create paralax effect
+        
         load(level: "Level_0-1")
     }
     
@@ -78,6 +96,7 @@ class GameScene: SKScene {
         
         if gameState == .ongoing { // level will only scroll when the game is started by user
             worldLayer.update(dt) // always having an update since the function was called last time --> smooth animation of worldlayer
+            backgroundLayer.update(dt)
         }
         
     }
