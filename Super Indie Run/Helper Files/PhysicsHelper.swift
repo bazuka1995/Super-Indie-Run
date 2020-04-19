@@ -20,6 +20,9 @@ class PhysicsHelper {
             sprite.physicsBody!.categoryBitMask = GameConstants.PhysicsCategories.playerCategory
             sprite.physicsBody!.collisionBitMask = GameConstants.PhysicsCategories.groundCategory | GameConstants.PhysicsCategories.finishCategory // allows player to collide with the floor and the finish line
             sprite.physicsBody!.contactTestBitMask = GameConstants.PhysicsCategories.allCategory // chekc contact with all elements of the game
+        case GameConstants.StringConstants.finishLineName:
+            sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
+            sprite.physicsBody!.categoryBitMask = GameConstants.PhysicsCategories.finishCategory
         default:
             sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size) // if there isnt a specific node, we add a generic rectangle physics body
         }

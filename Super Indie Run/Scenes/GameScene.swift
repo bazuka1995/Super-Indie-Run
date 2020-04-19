@@ -84,6 +84,11 @@ class GameScene: SKScene {
             tileMap = groundTiles
             tileMap.scale(to: frame.size, width: false, multiplier: 1.0) // false because use height to scale --> make sure that the level scales correctly depending on the size of the screen
             PhysicsHelper.addPhysicsBody(to: tileMap, tileInfo: "ground")
+            for child in groundTiles.children {
+                if let sprite = child as? SKSpriteNode, sprite.name != nil {
+                    ObjectHelper.handleChild(sprite: sprite, name: sprite.name!)
+                }
+            }
         }
         
         addPlayer()
@@ -198,6 +203,8 @@ extension GameScene: SKPhysicsContactDelegate { // what happens when contacts oc
         case GameConstants.PhysicsCategories.playerCategory | GameConstants.PhysicsCategories.groundCategory: // check for contact between ground and player
             player.airBorne = false
             brake = false
+        case GameConstants.PhysicsCategories.playerCategory | GameConstants.PhysicsCategories.finishCategory:
+            gameState = .finished
         default:
             break
         }
