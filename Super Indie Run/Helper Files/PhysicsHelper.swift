@@ -23,8 +23,16 @@ class PhysicsHelper {
         case GameConstants.StringConstants.finishLineName:
             sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
             sprite.physicsBody!.categoryBitMask = GameConstants.PhysicsCategories.finishCategory
+        case GameConstants.StringConstants.enemyName:
+            sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
+            sprite.physicsBody!.categoryBitMask = GameConstants.PhysicsCategories.enemyCategory
         default:
             sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size) // if there isnt a specific node, we add a generic rectangle physics body
+        }
+        
+        if name != GameConstants.StringConstants.playerName {
+            sprite.physicsBody!.contactTestBitMask = GameConstants.PhysicsCategories.playerCategory
+            sprite.physicsBody!.isDynamic = false
         }
         
     }

@@ -12,7 +12,7 @@ class ObjectHelper {
     
     static func handleChild(sprite: SKSpriteNode, name: String) {
         switch name {
-        case GameConstants.StringConstants.finishLineName:
+        case GameConstants.StringConstants.finishLineName, GameConstants.StringConstants.enemyName:
             PhysicsHelper.addPhysicsBody(to: sprite, with: name)
         default:
             break
