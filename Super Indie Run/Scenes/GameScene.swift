@@ -37,6 +37,9 @@ class GameScene: SKScene {
     
     var player: Player!
     
+    var touch = false // whether or not a finger is touching the screen
+    var brake = false
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0, dy: -6.0)
@@ -96,23 +99,65 @@ class GameScene: SKScene {
         player.loadTextures()
         player.state = .idle
         addChild(player)
+        addPlayerActions()
+    }
+    
+    func addPlayerActions() {
+        let up = SKAction.moveBy(x: 0.0, y: frame.size.height/4, duration: 0.4)
+        up.timingMode = .easeOut // slow down the action at the end
+        
+        player.createUserData(entry: up, forKey: GameConstants.StringConstants.jumpUpActionKey) // added the action to playersprite node
+        
+        let move = SKAction.moveBy(x: 0.0, y: player.size.height, duration: 0.4)
+        let jump = SKAction.animate(with: player.jumpFrames, timePerFrame: 0.4/Double(player.jumpFrames.count))
+        let group = SKAction.group([move, jump])
+        
+        player.createUserData(entry: group, forKey: GameConstants.StringConstants.brakeDescendActionKey)
+    }
+    
+    func jump() {
+        player.airBorne = true
+        player.turnGravity(on: false) // temp turn player gravity off so that he can jump
+        player.run(player.userData?.value(forKey: GameConstants.StringConstants.jumpUpActionKey) as! SKAction) {
+            if self.touch {
+                self.player.run(self.player.userData?.value(forKey: GameConstants.StringConstants.jumpUpActionKey) as! SKAction, completion: {
+                    self.player.turnGravity(on: true)
+                })
+            }
+        }
+    }
+    
+    func brakeDescend() {
+        brake = true
+        player.physicsBody!.velocity.dy = 0.0
+        
+        player.run(player.userData?.value(forKey: GameConstants.StringConstants.brakeDescendActionKey) as! SKAction)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch gameState {
         case .ready:
             gameState = .ongoing // start the game
+        case .ongoing:
+            touch = true
+            if !player.airBorne {
+                jump()
+            } else if !brake {
+                brakeDescend()
+            }
         default:
             break
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { // called when touches on screen have stopped
-        
+        touch = false
+        player.turnGravity(on: true)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        touch = false
+        player.turnGravity(on: true)
     }
     
     override func update(_ currentTime: TimeInterval) { // Parameter = current system time.
@@ -144,6 +189,29 @@ class GameScene: SKScene {
     
 }
 
-extension GameScene: SKPhysicsContactDelegate {
+extension GameScene: SKPhysicsContactDelegate { // what happens when contacts occur
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask // the parameter contains the two bodys that have made contact, then we create a contact mask containing the bit masks of the two bodies
+        
+        switch contactMask {
+        case GameConstants.PhysicsCategories.playerCategory | GameConstants.PhysicsCategories.groundCategory: // check for contact between ground and player
+            player.airBorne = false
+            brake = false
+        default:
+            break
+        }
+        
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        switch contactMask {
+        case GameConstants.PhysicsCategories.playerCategory | GameConstants.PhysicsCategories.groundCategory: // cant jump if fallen off a ledge
+            player.airBorne = true
+        default:
+            break
+        }
+    }
     
 }

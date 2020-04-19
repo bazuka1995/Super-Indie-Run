@@ -11,6 +11,18 @@ import CoreGraphics
 
 struct GameConstants {
     
+    struct PhysicsCategories {
+        static let noCategory: UInt32 = 0 // for physics bodies with no specific categories
+        static let allCategory: UInt32 = UInt32.max
+        static let playerCategory: UInt32 = 0x1 // 1
+        static let groundCategory: UInt32 = 0x1 << 1 // 10
+        static let finishCategory: UInt32 = 0x1 << 2 // 100
+        static let collectibleCategory: UInt32 = 0x1 << 3 // 1000
+        static let enemyCategory: UInt32 = 0x1 << 4
+        static let frameCategory: UInt32 = 0x1 << 5
+        static let ceilingCategory: UInt32 = 0x1 << 6
+    }
+    
     struct ZPositions { // what elements are showed in front of other elements. Higher z position will be displayed in front of lower ones
         static let farBGZ: CGFloat = 0 // background image
         static let closeBGZ: CGFloat = 1 // close images
@@ -35,6 +47,9 @@ struct GameConstants {
         static let runPrefixKey = "Run_"
         static let jumpPrefixKey = "Jump_"
         static let diePrefixKey = "Die_"
+        
+        static let jumpUpActionKey = "JumpUp"
+        static let brakeDescendActionKey = "BrakeDescend"
     }
     
 }

@@ -17,6 +17,9 @@ class PhysicsHelper {
             sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: sprite.size.width/2, height: sprite.size.height)) //create a physics body rectangle for the player width is slightly smaller than the player size)
             sprite.physicsBody!.restitution = 0.0 // player doesnt keep energy when hitting other physics objects
             sprite.physicsBody!.allowsRotation = false
+            sprite.physicsBody!.categoryBitMask = GameConstants.PhysicsCategories.playerCategory
+            sprite.physicsBody!.collisionBitMask = GameConstants.PhysicsCategories.groundCategory | GameConstants.PhysicsCategories.finishCategory // allows player to collide with the floor and the finish line
+            sprite.physicsBody!.contactTestBitMask = GameConstants.PhysicsCategories.allCategory // chekc contact with all elements of the game
         default:
             sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size) // if there isnt a specific node, we add a generic rectangle physics body
         }
